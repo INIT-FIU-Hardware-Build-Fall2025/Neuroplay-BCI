@@ -1,3 +1,6 @@
+# Car Game Repo
+# Manual data collection script for EEG data from Arduino to CSV file
+
 import serial
 import csv
 import time
