@@ -24,14 +24,9 @@ def show_info():
 # This function checks the focus status from a file
 # Continue the implementation below, test if there is delay
 
-def checkFocus():
-    with open("modelRawData.txt", "r") as f:
-    value = int(f.read().strip())
-    if value == 1:
+
         
 
-
-    print("press the key")
 
 if __name__ == "__main__":
     try:
@@ -40,6 +35,16 @@ if __name__ == "__main__":
         px = Picarx()
         show_info()
         while True:
+            with open("modelRawData.txt", "r") as f:
+                value = int(f.read().strip())
+
+            if value == 1:
+                px.set_dir_servo_angle(0)
+                px.forward(80)
+
+            if value == 0:
+                px.set_dir_servo_angle(0)
+                px.forward(0)
             key = readchar.readkey()
             key = key.lower()
             if key in('wsadikjl'): 
