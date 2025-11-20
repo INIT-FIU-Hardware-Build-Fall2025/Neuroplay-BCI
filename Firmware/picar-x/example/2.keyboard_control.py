@@ -2,8 +2,6 @@ from picarx import Picarx
 from time import sleep
 import readchar
 
-
-
 manual = '''
 Press keys on keyboard to control PiCar-X!
     w: Forward
@@ -21,25 +19,25 @@ def show_info():
     print("\033[H\033[J",end='')  # clear terminal windows
     print(manual)
 
-# This function checks the focus status from a file
-# Continue the implementation below, test if there is delay
+# This function checks the focus status from a file being updated live
 
-def checkFocus():
-    with open("modelRawData.txt", "r") as f:
-    value = int(f.read().strip())
-    if value == 1:
-        
-
-
-    print("press the key")
-
-if __name__ == "__main__":
+if _name_ == "_main_":
     try:
         pan_angle = 0
         tilt_angle = 0
         px = Picarx()
         show_info()
         while True:
+            with open("modelRawData.txt", "r") as f:
+                value = int(f.read().strip())
+
+            if value == 1:
+                px.set_dir_servo_angle(0)
+                px.forward(80)
+
+            if value == 0:
+                px.set_dir_servo_angle(0)
+                px.forward(0)
             key = readchar.readkey()
             key = key.lower()
             if key in('wsadikjl'): 
@@ -88,5 +86,3 @@ if __name__ == "__main__":
         px.set_dir_servo_angle(0)  
         px.stop()
         sleep(.2)
-
-
