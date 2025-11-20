@@ -21,7 +21,7 @@ def show_info():
 
 # This function checks the focus status from a file being updated live
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     try:
         pan_angle = 0
         tilt_angle = 0
