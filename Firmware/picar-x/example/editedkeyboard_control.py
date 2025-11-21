@@ -19,17 +19,33 @@ def show_info():
     print("\033[H\033[J",end='')  # clear terminal windows
     print(manual)
 
+# This function checks the focus status from a file being updated live
 
-if __name__ == "__main__":
+if __name__ == "_main_":
     try:
         pan_angle = 0
         tilt_angle = 0
         px = Picarx()
         show_info()
+
+
         while True:
+            # # Code for reading value from file
+            # # with open("modelRawData.txt", "r") as f:
+            # #     value = int(f.read().strip())
+            # if value == 1:
+            #     px.set_dir_servo_angle(0)
+            #     px.forward(80)
+
+            # if value == 0:
+            #     px.set_dir_servo_angle(0)
+            #     px.forward(0)
+                
             key = readchar.readkey()
             key = key.lower()
+            # Add 0 or 1 key to char list to manually test on car
             if key in('wsadikjl'): 
+
                 if 'w' == key:
                     px.set_dir_servo_angle(0)
                     px.forward(80)
@@ -57,7 +73,14 @@ if __name__ == "__main__":
                 elif 'j' == key:
                     pan_angle-=5
                     if pan_angle<-30:
-                        pan_angle=-30                 
+                        pan_angle=-30
+                # Added to manually test on car
+                # elif '1' == key:
+                #     px.set_dir_servo_angle(0)
+                #     px.forward(80)
+                # elif '0' == key:
+                #     px.set_dir_servo_angle(0)
+                #     px.forward(0)
 
                 px.set_cam_tilt_angle(tilt_angle)
                 px.set_cam_pan_angle(pan_angle)      
@@ -75,5 +98,3 @@ if __name__ == "__main__":
         px.set_dir_servo_angle(0)  
         px.stop()
         sleep(.2)
-
-
