@@ -5,7 +5,7 @@ import time
 HOST = "0.0.0.0"
 PORT = 5000
 
-
+# Main function to handle TCP connections and control PiCar-X
 def main():
     px = Picarx()
     px.set_dir_servo_angle(0)
@@ -14,6 +14,8 @@ def main():
     print("BrainControl Server running...")
     print("Waiting for ML client to connect...")
 
+
+# Set up the TCP server
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind((HOST, PORT))
@@ -22,6 +24,8 @@ def main():
         conn, addr = s.accept()
         print(f"Connected by {addr}")
 
+
+# Handle client connection and actions that come in from ML model.
         with conn:
             while True:
                 data = conn.recv(1024)
@@ -32,7 +36,7 @@ def main():
 
                 msg = data.decode().strip().upper()
                 print("Received:", msg)
-
+#translate messages into car actions
                 if msg == "GO":
                     print("UNFOCUSED → GO")
                     px.forward(40)
@@ -44,6 +48,7 @@ def main():
                 else:
                     print("Unknown → STOP (safety)")
                     px.forward(0)
+
 
 if __name__ == "__main__":
     main()
