@@ -1,11 +1,15 @@
-# 🧠🚗 NeuroPlay: Gaming with Brainwaves
+<p align="center">
+  <img src="Interface/Images/Banner.JPEG" alt="NeuroPlay Banner" width="100%">
+</p>
+
+# 🧠 NeuroPlay: Gaming with Brainwaves
 Control a robot car **with your brain** using EEG signals, machine learning, and real-time robotics.  
 This project combines **biosignal processing**, **ML classification**, and **embedded systems** into one cohesive, magical experience.
 
 ## What This Project Does
 
 NeuroPlay reads EEG signals from the **BioAmp EXG Pill**, detects mental states like  
-**🟢 focus**, **🔴 unfocus**, and **✨ blinks**,  
+**🟢 focus**, **🔴 unfocus**, and ** blinks**,  
 and sends commands over TCP to a Raspberry Pi–powered **PiCar-X**.
 
 The result?  
