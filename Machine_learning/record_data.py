@@ -1,12 +1,17 @@
 import serial
 import time
+from datetime import datetime
 
 # Setup the serial port (ensure it matches your Arduino setup)
 serial_port = "COM4"  # Adjust to your port (e.g., "COM4" for Windows, "/dev/ttyUSB0" for Linux)
 baud_rate = 115200    # Make sure this matches the baud rate in your Arduino code
 
 # File to store data
-file_name = "data.txt"
+# file_name = "data.txt"
+
+# Create a unique filename for each run
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+file_name = f"data_{timestamp}.txt"
 
 def open_serial_connection(port, baud_rate):
     """Open the serial connection."""
