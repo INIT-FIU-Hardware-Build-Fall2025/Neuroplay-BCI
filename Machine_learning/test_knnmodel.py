@@ -2,6 +2,7 @@ import serial
 import time
 import numpy as np
 import pickle
+import socket
 from scipy.signal import welch
 from tkinter import filedialog
 import tkinter as tk
@@ -55,6 +56,15 @@ ser = serial.Serial(PORT, BAUD)
 time.sleep(2)
 print(f"Connected to {PORT} at {BAUD} baud")
 
+# TCP Connection to PiCar
+PI_IP = "172.20.10.5"   # The Pi's IP address
+PI_PORT = 5000
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+print("Connecting to PiCar...")
+sock.connect((PI_IP, PI_PORT))
+print("Connected to PiCar TCP server!")
+
 # ---------- Live Prediction Loop ----------
 buffer = []
 
@@ -91,6 +101,18 @@ try:
                 pred = "blink"
                 
             print(f"Predicted: {pred}")
+            
+            # Send current state to PiCar
+            try:
+                if pred == "focused":
+                    sock.sendall(b"FOCUS\n")
+                elif pred == "unfocused":
+                    sock.sendall(b"UNFOCUS\n")
+                elif pred == "blink":
+                    sock.sendall(b"BLINK\n")
+            except:
+                print("Lost connection to PiCar! Please check")
+            
             buffer = buffer[-win:]  # slide window forward
 
 except KeyboardInterrupt:
