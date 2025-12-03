@@ -1,25 +1,50 @@
-# NeuroPlay: Gaming with Brainwaves
-*A beginner-friendly brain–computer interface (BCI) project for Build.*
+<p align="center">
+  <img src="Interface/Images/Banner.JPEG" alt="NeuroPlay Banner" width="100%">
+</p>
 
-Control a simple endless-runner game using **focus**, **relaxation**, and **blinks** from an EEG headband. This project runs for **9 weeks** and is designed for beginners to learn hardware, software, and HCI—together.
+# 🧠 NeuroPlay: Gaming with Brainwaves
+Control a robot car **with your brain** using EEG signals, machine learning, and real-time robotics.  
+This project combines **biosignal processing**, **ML classification**, and **embedded systems** into one cohesive, magical experience.
 
-## ✨ MVP (9 weeks)
-- Focus → speed up
-- Relax → slow down
-- Blink → jump
-- Calibration screen + basic smoothing (EMA + blink debounce )
+## What This Project Does
 
-## 🧱 Stack
-- **Firmware:** Arduino (Bluetooth/Serial bridge)
-- **App:** Python + Pygame (or Unity as a variant)
-- **ML/UX:** simple filters (EMA, thresholds), per-user calibration
-- **Collab:** GitHub Issues • Projects • Discussions
+NeuroPlay reads EEG signals from the **BioAmp EXG Pill**, detects mental states like  
+**🟢 focus**, **🔴 unfocus**, and ** blinks**,  
+and sends commands over TCP to a Raspberry Pi–powered **PiCar-X**.
 
-## 🚀 Quick Start
+The result?  
+You move the car **just by thinking.**
 
-> Start with the **simulator** so the app works before hardware is ready.
+## System Architecture
 
-```bash
-# 1) Run the simulator (emits JSON with attention/meditation/blink)
-python simulator/simulate_stream.py | python teams/app/main.py
+BioAmp EXG Pill → Arduino → Python ML Interpreter → TCP Socket → Raspberry Pi → PiCar-X Motors
 
+## ✨ Features
+
+- Real-time EEG brainwave streaming  
+- KNN-based classification of focused / unfocused mental state  
+- Blink detection  
+- TCP communication pipeline  
+- Robot control (forward, stop, optional turns)  
+- Smoothing to avoid jitter or accidental spikes  
+
+
+## 🧱 Tech Stack
+
+**Hardware**
+- BioAmp EXG Pill  
+- Arduino Uno  
+- Raspberry Pi 5  
+- PiCar-X Robotics Kit  
+
+**Software**
+- Python  
+- NumPy, SciPy, scikit-learn  
+- Socket networking  
+- Arduino IDE  
+- PiCar-X Python API  
+
+## 👩‍🚀 Team & Vision
+
+NeuroPlay is built to make neurotechnology fun, accessible, and empowering for students and creators.
+Using affordable hardware and approachable ML, we turn brainwaves into real-world actions.
