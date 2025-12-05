@@ -1,0 +1,58 @@
+#define BAUD_RATE 115200
+
+// EEG input
+#define EEG_PIN A0
+
+// X-axis input (left/right tilt)
+#define X_PIN A1
+
+int baselineX = 0;
+bool baselineSet = false;
+
+void setup() {
+  Serial.begin(BAUD_RATE);
+}
+
+void loop() {
+
+  // --------- EEG at 250 Hz ---------
+  static unsigned long lastSample = 0;
+  unsigned long now = micros();
+  int eeg_value = 0;
+
+  if (now - lastSample >= 4000) {   // 250 Hz
+    lastSample = now;
+
+    // Read EEG
+    eeg_value = analogRead(EEG_PIN);
+  }
+
+  // --------- Read X-axis (left/right tilt) ---------
+  int gx = analogRead(X_PIN);
+
+  // Reject impossible noise spikes
+  if (gx < 50 || gx > 1000) return;
+
+  // --------- Auto-baseline on startup ---------
+  if (!baselineSet) {
+    baselineX = gx;
+    baselineSet = true;
+  }
+
+  // --------- Determine direction ---------
+  int diff = gx - baselineX;
+  int threshold = 20;
+
+  const char* direction;
+
+  if (diff > threshold) direction = "RIGHT";
+  else if (diff < -threshold) direction = "LEFT";
+  else direction = "CENTER";
+
+  // --------- OUTPUT (CSV FORMAT) ---------
+  Serial.print(eeg_value);   // numeric only
+  Serial.print(",");
+  Serial.println(direction); // LEFT, RIGHT, CENTER
+
+  delay(10);
+}
