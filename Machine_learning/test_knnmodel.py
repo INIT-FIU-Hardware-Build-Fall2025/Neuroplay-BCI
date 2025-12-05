@@ -57,7 +57,7 @@ time.sleep(2)
 print(f"Connected to {PORT} at {BAUD} baud")
 
 # TCP Connection to PiCar
-PI_IP = "172.20.10.5"   # The Pi's IP address
+PI_IP = "172.20.10.2"   # The Pi's IP address
 PI_PORT = 5000
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
