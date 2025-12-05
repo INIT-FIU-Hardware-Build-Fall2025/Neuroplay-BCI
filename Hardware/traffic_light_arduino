@@ -1,0 +1,46 @@
+
+// make sure pins are correct by what is displayed on the arduino
+const int red = 3;
+const int yellow = 4;
+const int green = 5;
+
+const int buttonPin = 2;
+
+bool lastState = HIGH;   
+bool running = false;
+
+void setup() {
+  pinMode(red, OUTPUT);
+  pinMode(yellow, OUTPUT);
+  pinMode(green, OUTPUT);
+
+  pinMode(buttonPin, INPUT_PULLUP);  
+}
+
+void loop() {
+  bool currentState = digitalRead(buttonPin);
+
+ 
+  if (lastState == HIGH && currentState == LOW && !running) {
+    running = true;         
+    runSequence();          
+    running = false;        
+  }
+
+  lastState = currentState;
+}
+
+void runSequence() {
+ 
+  digitalWrite(red, HIGH);
+  delay(2500);
+  digitalWrite(red, LOW);
+
+  digitalWrite(yellow, HIGH);
+  delay(2500);
+  digitalWrite(yellow, LOW);
+
+  digitalWrite(green, HIGH);
+  delay(2500);
+  digitalWrite(green, LOW);
+}
