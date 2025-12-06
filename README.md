@@ -8,7 +8,7 @@ This project combines **biosignal processing**, **ML classification**, and **emb
 
 ## What This Project Does
 
-NeuroPlay reads EEG signals from the **BioAmp EXG Pill**, detects mental states like  
+NeuroPlay reads EEG signals from the **BioAmp EXG Pill**, detects mental states like   
 **🟢 focus**, **🔴 unfocus**, and ** blinks**,  
 and sends commands over TCP to a Raspberry Pi–powered **PiCar-X**.
 
